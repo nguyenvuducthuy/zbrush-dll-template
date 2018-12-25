@@ -23,6 +23,8 @@ extern "C"
 	float DLL_EXPORT HelloDLL(char* sometext, double optValue, char* pOptBuffer1, int optBuffer1Size,
 		char* pOptBuffer2, int optBuffer2Size, char** zData);
 
+	long double DLL_EXPORT LaunchAppWithFile(LPCSTR lpFile, int a2, int a3, int a4);
+
 #ifdef __cplusplus
 }
 #endif
