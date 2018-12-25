@@ -1,50 +1,60 @@
-[VarDef,dllPath,""]//path to dll
-[VarDef,err,0]//standard error
-[VarDef,ver,0]//version
-[VarDef,stringArg,""]
-[VarDef,responseString,""]
+// [VarDef,dllPath,""]//path to dll
+// [VarDef,err,0]//standard error
+// [VarDef,ver,0]//version
+// [VarDef,stringArg,""]
+// [VarDef,responseString,""]
 
-[RoutineDef,CheckSystem,
-	[VarSet,dllPath,"plugin-template/zbrush-dll-template.dll"]
-	[If,[FileExists,dllPath],
-		,
-		[Note,"DLL is missing"][Exit]
-	]
+// [RoutineDef,CheckSystem,
+// 	[VarSet,dllPath,"plugin-template/zbrush-dll-template.dll"]
+// 	[If,[FileExists,dllPath],
+// 		,
+// 		[Note,"DLL is missing"][Exit]
+// 	]
+// ]
+
+
+
+// [ISubPalette, "Zplugin:Plugin Template",1]
+
+// [IButton,"Zplugin:Plugin Template:Test Version","Test DLL Version function",
+// 	[IConfig,2018]
+// 	[RoutineCall,CheckSystem]
+// 	[VarSet,ver,0]//version
+// 	[VarSet,ver,[FileExecute,[Var,dllPath],"Version"]]
+// 	[Note,[StrMerge,"This DLL is version ",ver]]
+
+// ]
+
+
+
+// [IButton,"Zplugin:Plugin Template:Test HelloDLL","Test DLL HelloDLL function",
+// 	[IConfig,2018]
+// 	[RoutineCall,CheckSystem]
+// 	[VarSet,stringArg,"Hello from ZBrush"]
+// 	//create buffer for response string
+// 	//this buffer can also pass a string to the dll (such as a second file path)
+
+// 	[MemCreate,Test_DLL_mem, 256, 0]
+// 	[VarSet,err,[FileExecute,[Var,dllPath],"HelloDLL",#stringArg,,Test_DLL_mem]]
+
+
+// 	[If,err,
+// 		[Note,"An error has occured"]
+// 		[Exit]
+// 		,
+// 		[MemReadString,Test_DLL_mem,#responseString]
+// 		[Note,responseString]//should say 'Hello from my DLL'
+// 		[MemDelete,Test_DLL_mem]//done with buffer, delete it
+// 	]
+
+// ]
+
+// [IButton,"Test Version","Test DLL Version function",
+// 	[FileExecute,"D:\thuy_data\thuy_zbrush\zbrush-dll-template\x64\Debug\zbrush-dll-template.dll",LaunchAppWithFile,"notepad.exe"]
+// ]
+
+[IButton,"Test Version","Test DLL Version function",
+	[MemCreate,Test_DLL_mem, 256, 0]
+	[FileExecute, "D:\thuy_data\thuy_zbrush\zbrush-dll-template\x64\Debug\zbrush-dll-template.dll", "anhungxadieu", #stringArg,, Test_DLL_mem]
 ]
 
-
-
-[ISubPalette, "Zplugin:Plugin Template",1]
-
-[IButton,"Zplugin:Plugin Template:Test Version","Test DLL Version function",
-	[IConfig,2018]
-	[RoutineCall,CheckSystem]
-	[VarSet,ver,0]//version
-	[VarSet,ver,[FileExecute,[Var,dllPath],"Version"]]
-	[Note,[StrMerge,"This DLL is version ",ver]]
-	
-]
-
-
-
-[IButton,"Zplugin:Plugin Template:Test HelloDLL","Test DLL HelloDLL function",
-	[IConfig,2018]
-	[RoutineCall,CheckSystem]
-	[VarSet,stringArg,"Hello from ZBrush"]
-	//create buffer for response string
-	//this buffer can also pass a string to the dll (such as a second file path)
-
-	[MemCreate,Test_DLL_mem, 256, 0]	
-	[VarSet,err,[FileExecute,[Var,dllPath],"HelloDLL",#stringArg,,Test_DLL_mem]]
-
-
-	[If,err,
-		[Note,"An error has occured"]
-		[Exit]
-		,
-		[MemReadString,Test_DLL_mem,#responseString]
-		[Note,responseString]//should say 'Hello from my DLL'
-		[MemDelete,Test_DLL_mem]//done with buffer, delete it
-	]
-
-]
