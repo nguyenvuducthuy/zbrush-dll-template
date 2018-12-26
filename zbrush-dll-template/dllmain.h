@@ -25,7 +25,7 @@ extern "C"
 
 	long double DLL_EXPORT LaunchAppWithFile(LPCSTR lpFile, int a2, int a3, int a4);
 
-	int DLL_EXPORT anhungxadieu(unsigned char* message, double number, void* memblock, void* memblock2);
+	int DLL_EXPORT anhungxadieu(int num, double number, void* memblock, void* memblock2);
 
 #ifdef __cplusplus
 }

@@ -54,6 +54,10 @@
 // ]
 
 [IButton,"Test Version","Test DLL Version function",
+	// [VarSet,stringArg,[ToolGetPath, 0]]
+	[VarDef,stringArg,""]
+	[Mesh3DGet, 0,,, #stringArg]
+	// [Note, #stringArg]
 	[MemCreate,Test_DLL_mem, 256, 0]
 	[FileExecute, "D:\thuy_data\thuy_zbrush\zbrush-dll-template\x64\Debug\zbrush-dll-template.dll", "anhungxadieu", #stringArg,, Test_DLL_mem]
 ]
